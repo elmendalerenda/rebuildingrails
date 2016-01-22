@@ -1,5 +1,7 @@
-require "routing"
 require "rulers/version"
+require "routing"
+require "rulers/util"
+require "rulers/dependencies"
 
 module Rulers
   class Application
@@ -12,7 +14,6 @@ module Rulers
     rescue UnknownControllerError
       index_content = File.readlines("public/index.html").join
       [200, {'Location' => 'index.html' }, [index_content]]
-
     end
   end
 
