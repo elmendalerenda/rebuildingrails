@@ -1,6 +1,7 @@
 require "rulers/version"
-require "routing"
+require "rulers/routing"
 require "rulers/util"
+require "rulers/controller"
 require "rulers/dependencies"
 
 module Rulers
@@ -11,17 +12,9 @@ module Rulers
       text = controller.send(act)
       [200, {'Content-Type' => 'text/html'},
        [text]]
-    rescue UnknownControllerError
-      index_content = File.readlines("public/index.html").join
-      [200, {'Location' => 'index.html' }, [index_content]]
-    end
-  end
-
-  class Controller
-    def initialize(env)
-      @env = env end
-    def env
-      @env
-    end
+     rescue UnknownControllerError
+       index_content = File.readlines("public/index.html").join
+       [200, {'Location' => 'index.html' }, [index_content]]
+     end
   end
 end

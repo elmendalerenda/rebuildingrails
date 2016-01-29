@@ -5,10 +5,14 @@ module Rulers
       _, cont, action, after =
         env["PATH_INFO"].split('/', 4)
       cont = cont.capitalize # "People"
+      raise UnknownControllerError if cont.empty?
       cont += "Controller" # "PeopleController"
+      puts '#########'
+      puts cont.inspect
+      puts action.inspect
       [Object.const_get(cont), action]
-    rescue NameError
-      raise UnknownControllerError
+     rescue NameError
+       raise UnknownControllerError
     end
   end
 end

@@ -1,7 +1,17 @@
 require_relative "test_helper"
 
-class TestApp < Rulers::Application
+class TestController < Rulers::Controller
+  def index
+    "Hello!"  # Not rendering a view
+  end
 end
+
+class TestApp < Rulers::Application
+  def get_controller_and_action(env)
+    [TestController, "index"]
+  end
+end
+
 
 class RulersAppTest < Test::Unit::TestCase
   include Rack::Test::Methods
