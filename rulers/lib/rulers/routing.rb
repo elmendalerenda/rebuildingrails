@@ -7,9 +7,6 @@ module Rulers
       cont = cont.capitalize # "People"
       raise UnknownControllerError if cont.empty?
       cont += "Controller" # "PeopleController"
-      puts '#########'
-      puts cont.inspect
-      puts action.inspect
       [Object.const_get(cont), action]
      rescue NameError
        raise UnknownControllerError

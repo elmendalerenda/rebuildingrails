@@ -1,0 +1,4 @@
+<% quotes.each do |q| %>
+  <p> <%= q["quote"] %> </p>
+  <p> <a href="/quotes/index?submitter=<%= q["submitter"] %>"> <%= q["submitter"] %> </a> </p>
+<% end %>
