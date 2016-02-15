@@ -1,7 +1,10 @@
 <p>
-  &quot;<%= obj["quote"] %>&quot;
-  <br/> &ndash; <%= obj["attribution"] %>
+  &quot;<%= @quote["quote"] %>&quot;
+  <br/> &ndash; <%= @quote["attribution"] %>
 </p>
 <p>
-  Submitted by <%= obj["submitter"] %>
+  Submitted by <%= @quote["submitter"] %>
+</p>
+<p>
+  Viewing with user agent: <%= @ua %>
 </p>

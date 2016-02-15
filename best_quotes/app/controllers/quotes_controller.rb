@@ -9,13 +9,20 @@ class QuotesController < Rulers::Controller
   end
 
   def index
-    req = Rack::Request.new(@env)
-    if req.params['submitter'].nil?
+    if params['submitter'].nil?
       quotes = FileModel.all
     else
-      quotes = FileModel.find_all_by_submitter(req.params['submitter'])
+      quotes = FileModel.find_all_by_submitter(params['submitter'])
     end
     render :index, :quotes => quotes
+  end
+
+  def show
+    quote = FileModel.find(params["id"])
+    @ua = request.user_agent
+    @quote = quote
+
+    render_response :quote
   end
 
   def new_quote
@@ -29,10 +36,8 @@ class QuotesController < Rulers::Controller
   end
 
   def update_quote
-    req = Rack::Request.new(@env)
-
     quote_1 = FileModel.find(1)
-    quote_1['submitter'] = req.params['submitter']
+    quote_1['submitter'] = params['submitter']
     quote_1.save
 
     render :quote, obj: quote_1
